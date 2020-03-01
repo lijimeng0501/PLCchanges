@@ -1,0 +1,1198 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--调节阀门子程序-->
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="28.02" TargetName="Valve_DT" TargetType="AddOnInstructionDefinition" TargetRevision="1.0 " TargetLastEdited="2020-02-20T03:47:03.618Z" ContainsContext="true" Owner="Lenovo" ExportDate="Fri Feb 21 18:32:42 2020" ExportOptions="References NoRawData L5KData DecoratedData Context Dependencies ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Context" Name="CDDT_L6_HK_A_V10">
+<DataTypes Use="Context">
+</DataTypes>
+<AddOnInstructionDefinitions Use="Context">
+<AddOnInstructionDefinition Use="Target" Name="Valve_DT" Revision="1.0" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2018-08-25T03:54:39.456Z" CreatedBy="SC-201805191256\Administrator" EditedDate="2020-02-20T03:47:03.618Z" EditedBy="DESKTOP-GR19KFG\Lenovo" SoftwareRevision="v28.02"
+>
+<Description>
+<![CDATA[调节阀门子程序]]>
+</Description>
+<Parameters>
+<Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[启用输入 - 系统定义的参数]]>
+</Description>
+</Parameter>
+<Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[启用输出 - 系统定义的参数]]>
+</Description>
+</Parameter>
+<Parameter Name="DI_Remote" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[远控]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DO_Open" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[开阀]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DI_Opened" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[全开]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DI_Closed" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[全关]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DI_Action" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[手动正在动作]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DI_FJ_Lock" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[风机连锁1：风机运行，0：风机失电]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Total_Reset" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[故障总复位]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Clear_Record" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[清除故障次数、运行时间记录]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Clock_1Hz" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1S时钟]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PLUS_1S" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1s脉冲]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Feedback" TagType="Base" DataType="INT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[反馈开度工程量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="CmdNo" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[命令号1、停止 2、普通开阀门 3、普通关阀门4、开度调节阀门 8、异警复位 0、保持原有状态]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Percent_SP_I" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[开度设定值0~100%]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Timeout_Limit_SP" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[超时时间]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="FJ_Stop_Time_SP" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[风机停止时间]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Offset_SP" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[阀门允许偏差1~100%]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="k" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[校正系数k]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="1.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="b" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[校正系数b]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DO_Close" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[关阀]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="DO_Action" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[超时&正在执行]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Running_Success" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[执行成功]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="AO_Percent_I" TagType="Base" DataType="INT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[显示开度0~100%]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="State" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[阀门状态编码]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Fault" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[故障次数]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_H" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行小时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_M" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行分]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_S" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行秒]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Output_Current" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[应答报文：循环发送电流]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cmd_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[HMI单设备控制命令号1、停止 2、普通开阀门 3、普通关阀门4、开度调节阀门 8、异警复位 9、保持原有状态]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="QR_HMI" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[单设备确认位，1S脉冲]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="AI_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[HMI单设备控制下发开度值]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Timeout" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[阀门超时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Mode_Status_HMI" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[0：为单设备控制； 1：当处于模式控制时，该单设备对应的模式运行时，不能控制该单设备]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="State_Text" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[阀门状态标签编码，避免正在动作时，标签闪烁]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Visible_QR_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏二次确认显示]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alarm_State_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏报警状态]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="QX" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[权限]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Event_Cmd_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏命令不清零，用于事件记录显示]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="AO_Percent_I1" TagType="Base" DataType="INT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[显示开度0~100%]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="AI_H" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[全开上限值]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+</Parameters>
+<LocalTags>
+<LocalTag Name="FJ_Stoping" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[风机已停止]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="IN_Offset" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[风阀动作至偏差范围内]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Ready_DO_Close" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[等待关阀中]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Last_Timeout" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Timeout_Plus" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[超时上升沿脉冲]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="DO_Time" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[风阀动作时间测量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Check_State" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[校时状态]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Last_CmdNo" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[上一次命令]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="FJ_Stop_Time" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[风机已停止计时时间]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="CL_AI" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[全关时开度值]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="OP_AI" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[全开时开度值]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="AI_L" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[全关下限值]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Alarm_State" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[触摸屏报警状态临时变量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+</LocalTags>
+<Routines>
+<Routine Name="Logic" Type="ST">
+<STContent>
+<Line Number="0">
+<![CDATA[//开度阀门控制程序]]>
+</Line>
+<Line Number="1">
+<![CDATA[(*CmdNo：1、停止   4、开度调节阀门 6、校正开度K、B值+开度是否要求为100？ 8、异警复位 0、保持原有状态*)]]>
+</Line>
+<Line Number="2">
+<![CDATA[]]>
+</Line>
+<Line Number="3">
+<![CDATA[//二次确认]]>
+</Line>
+<Line Number="4">
+<![CDATA[IF (Cmd_HMI = 4 AND QX AND NOT Mode_Status_HMI AND DI_Remote AND State<5  AND ((AI_HMI=100 AND State<>1) OR (AI_HMI=0 AND State<>2) OR NOT DI_FJ_Lock)) ]]>
+</Line>
+<Line Number="5">
+<![CDATA[OR//]]>
+</Line>
+<Line Number="6">
+<![CDATA[(Cmd_HMI = 1 AND QX AND NOT Mode_Status_HMI AND DI_Remote AND State<5)]]>
+</Line>
+<Line Number="7">
+<![CDATA[OR]]>
+</Line>
+<Line Number="8">
+<![CDATA[(Cmd_HMI = 8 AND QX AND NOT Mode_Status_HMI AND DI_Remote AND State>19)]]>
+</Line>
+<Line Number="9">
+<![CDATA[OR]]>
+</Line>
+<Line Number="10">
+<![CDATA[(Cmd_HMI = 6 AND QX AND NOT Mode_Status_HMI AND DI_Remote AND State<20)]]>
+</Line>
+<Line Number="11">
+<![CDATA[ THEN]]>
+</Line>
+<Line Number="12">
+<![CDATA[	Visible_QR_HMI := 1;]]>
+</Line>
+<Line Number="13">
+<![CDATA[	ELSE]]>
+</Line>
+<Line Number="14">
+<![CDATA[	Visible_QR_HMI := 0;]]>
+</Line>
+<Line Number="15">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="16">
+<![CDATA[]]>
+</Line>
+<Line Number="17">
+<![CDATA[]]>
+</Line>
+<Line Number="18">
+<![CDATA[//警告状态]]>
+</Line>
+<Line Number="19">
+<![CDATA[Alarm_State:= 0;]]>
+</Line>
+<Line Number="20">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=4  OR Cmd_HMI=8)  AND NOT QX  THEN  ]]>
+</Line>
+<Line Number="21">
+<![CDATA[Alarm_State:= 1;//权限在BAS，触摸屏不能控制]]>
+</Line>
+<Line Number="22">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="23">
+<![CDATA[]]>
+</Line>
+<Line Number="24">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=4 OR Cmd_HMI=8)  AND Mode_Status_HMI THEN  ]]>
+</Line>
+<Line Number="25">
+<![CDATA[Alarm_State:= 2;//大模式状态，HMI不能单设备控制]]>
+</Line>
+<Line Number="26">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="27">
+<![CDATA[]]>
+</Line>
+<Line Number="28">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=4 OR Cmd_HMI=6) AND State>19  THEN]]>
+</Line>
+<Line Number="29">
+<![CDATA[Alarm_State:= 3;//阀门动作超时]]>
+</Line>
+<Line Number="30">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="31">
+<![CDATA[]]>
+</Line>
+<Line Number="32">
+<![CDATA[IF Cmd_HMI=8 AND NOT Timeout  THEN ]]>
+</Line>
+<Line Number="33">
+<![CDATA[Alarm_State:= 4;//没有故障，不需要复位]]>
+</Line>
+<Line Number="34">
+<![CDATA[END_IF; ]]>
+</Line>
+<Line Number="35">
+<![CDATA[IF Cmd_HMI=4  AND AI_HMI=100  AND State= 1 THEN ]]>
+</Line>
+<Line Number="36">
+<![CDATA[Alarm_State:= 5;//阀门已经全开，不需要执行全开命令]]>
+</Line>
+<Line Number="37">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="38">
+<![CDATA[ ]]>
+</Line>
+<Line Number="39">
+<![CDATA[IF Cmd_HMI=4  AND AI_HMI=0 AND State= 2 THEN ]]>
+</Line>
+<Line Number="40">
+<![CDATA[Alarm_State:= 6;//阀门已经全关，不需要执行全关命令]]>
+</Line>
+<Line Number="41">
+<![CDATA[END_IF; ]]>
+</Line>
+<Line Number="42">
+<![CDATA[]]>
+</Line>
+<Line Number="43">
+<![CDATA[IF Cmd_HMI=4  AND AI_HMI<=10 AND DI_FJ_Lock THEN]]>
+</Line>
+<Line Number="44">
+<![CDATA[Alarm_State:= 7;//联锁风机未关闭，阀门关闭开度不能小于10]]>
+</Line>
+<Line Number="45">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="46">
+<![CDATA[IF (Cmd_HMI=1 OR Cmd_HMI=4 OR Cmd_HMI=6 OR Cmd_HMI=8)  AND NOT DI_Remote  THEN]]>
+</Line>
+<Line Number="47">
+<![CDATA[Alarm_State:= 8;//本地控制，HMI不能操作]]>
+</Line>
+<Line Number="48">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="49">
+<![CDATA[Alarm_State_HMI := Alarm_State;]]>
+</Line>
+<Line Number="50">
+<![CDATA[//HMI单设备命令控制]]>
+</Line>
+<Line Number="51">
+<![CDATA[IF QR_HMI THEN]]>
+</Line>
+<Line Number="52">
+<![CDATA[	CmdNo:=Cmd_HMI;]]>
+</Line>
+<Line Number="53">
+<![CDATA[	Event_Cmd_HMI:=Cmd_HMI;]]>
+</Line>
+<Line Number="54">
+<![CDATA[	Percent_SP_I:=AI_HMI;]]>
+</Line>
+<Line Number="55">
+<![CDATA[	Cmd_HMI := 0;]]>
+</Line>
+<Line Number="56">
+<![CDATA[	QR_HMI := 0;]]>
+</Line>
+<Line Number="57">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="58">
+<![CDATA[]]>
+</Line>
+<Line Number="59">
+<![CDATA[]]>
+</Line>
+<Line Number="60">
+<![CDATA[]]>
+</Line>
+<Line Number="61">
+<![CDATA[]]>
+</Line>
+<Line Number="62">
+<![CDATA[//风机停止延时]]>
+</Line>
+<Line Number="63">
+<![CDATA[IF NOT DI_FJ_Lock AND FJ_Stop_Time<FJ_Stop_Time_SP AND PLUS_1S THEN]]>
+</Line>
+<Line Number="64">
+<![CDATA[  FJ_Stop_Time:=FJ_Stop_Time+1;]]>
+</Line>
+<Line Number="65">
+<![CDATA[ELSIF DI_FJ_Lock THEN]]>
+</Line>
+<Line Number="66">
+<![CDATA[  FJ_Stop_Time:=0;]]>
+</Line>
+<Line Number="67">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="68">
+<![CDATA[FJ_Stoping:=FJ_Stop_Time>=FJ_Stop_Time_SP;]]>
+</Line>
+<Line Number="69">
+<![CDATA[//开度反馈校正]]>
+</Line>
+<Line Number="70">
+<![CDATA[AO_Percent_I:=k*(Feedback/27648)*100+b;]]>
+</Line>
+<Line Number="71">
+<![CDATA[AO_Percent_I1:=k*(Feedback/27648)*100+b;]]>
+</Line>
+<Line Number="72">
+<![CDATA[//偏差计算]]>
+</Line>
+<Line Number="73">
+<![CDATA[IF Percent_SP_I<>100 AND Percent_SP_I<>0 THEN]]>
+</Line>
+<Line Number="74">
+<![CDATA[   IN_Offset:=ABS(Percent_SP_I-AO_Percent_I)<=Offset_SP;]]>
+</Line>
+<Line Number="75">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="76">
+<![CDATA[//开阀]]>
+</Line>
+<Line Number="77">
+<![CDATA[DO_Open:=((DO_Open OR CmdNo=4 ) AND ((Percent_SP_I=100 AND NOT DI_Opened)OR(Percent_SP_I<>100 AND Percent_SP_I>AO_Percent_I AND NOT IN_Offset)) OR Check_State=2) AND CmdNo<>1 AND DI_Remote AND NOT Timeout AND NOT Ready_DO_Close;]]>
+</Line>
+<Line Number="78">
+<![CDATA[//关阀]]>
+</Line>
+<Line Number="79">
+<![CDATA[Ready_DO_Close:=((Ready_DO_Close  OR CmdNo=4 ) AND ((Percent_SP_I=0 AND NOT DI_Closed)OR(Percent_SP_I<>0 AND Percent_SP_I<AO_Percent_I AND NOT IN_Offset)) OR Check_State=1) AND CmdNo<>1 AND DI_Remote AND NOT Timeout AND NOT DO_Open;]]>
+</Line>
+<Line Number="80">
+<![CDATA[]]>
+</Line>
+<Line Number="81">
+<![CDATA[DO_Close:= (FJ_Stoping OR Percent_SP_I>10) AND Ready_DO_Close;]]>
+</Line>
+<Line Number="82">
+<![CDATA[//故障&正在执行输出]]>
+</Line>
+<Line Number="83">
+<![CDATA[DO_Action:=((DO_Open OR DO_Close OR (DI_Action AND NOT DI_Opened AND NOT DI_Closed)) AND Clock_1Hz) OR Timeout;]]>
+</Line>
+<Line Number="84">
+<![CDATA[//异警处理]]>
+</Line>
+<Line Number="85">
+<![CDATA[//动作计时]]>
+</Line>
+<Line Number="86">
+<![CDATA[IF (DO_Open OR DO_Close OR (DI_Action AND NOT DI_Opened AND NOT DI_Closed)) AND NOT Timeout AND PLUS_1S THEN]]>
+</Line>
+<Line Number="87">
+<![CDATA[  DO_Time:=DO_Time+1;]]>
+</Line>
+<Line Number="88">
+<![CDATA[ELSIF NOT DO_Open AND NOT DO_Close AND NOT DI_Action AND NOT Timeout THEN]]>
+</Line>
+<Line Number="89">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="90">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="91">
+<![CDATA[IF DO_Time>Timeout_Limit_SP OR (CmdNo=4 AND  NOT DI_Remote ) THEN]]>
+</Line>
+<Line Number="92">
+<![CDATA[  Timeout:=1;]]>
+</Line>
+<Line Number="93">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="94">
+<![CDATA[//故障复位]]>
+</Line>
+<Line Number="95">
+<![CDATA[IF CmdNo=8 OR Total_Reset THEN]]>
+</Line>
+<Line Number="96">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="97">
+<![CDATA[  Timeout:=0;]]>
+</Line>
+<Line Number="98">
+<![CDATA[  Check_State:=0;]]>
+</Line>
+<Line Number="99">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="100">
+<![CDATA[//阀门状态编码  state：半开=0，全开=1，全关=2，超时=20，]]>
+</Line>
+<Line Number="101">
+<![CDATA[//阀门状态编码  State_Text:半开=0，全开=1，全关=2， 正在动作=3，超时=20，]]>
+</Line>
+<Line Number="102">
+<![CDATA[IF NOT DI_Opened AND NOT DI_Closed AND NOT DO_Action THEN]]>
+</Line>
+<Line Number="103">
+<![CDATA[  State:=0;]]>
+</Line>
+<Line Number="104">
+<![CDATA[  State_Text:=0;]]>
+</Line>
+<Line Number="105">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="106">
+<![CDATA[IF DI_Opened THEN]]>
+</Line>
+<Line Number="107">
+<![CDATA[  State:=1;]]>
+</Line>
+<Line Number="108">
+<![CDATA[  State_Text:=1;]]>
+</Line>
+<Line Number="109">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="110">
+<![CDATA[IF DI_Closed THEN]]>
+</Line>
+<Line Number="111">
+<![CDATA[  State:=2;]]>
+</Line>
+<Line Number="112">
+<![CDATA[  State_Text:=2;]]>
+</Line>
+<Line Number="113">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="114">
+<![CDATA[IF DO_Action THEN]]>
+</Line>
+<Line Number="115">
+<![CDATA[  State:=20;]]>
+</Line>
+<Line Number="116">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="117">
+<![CDATA[IF Timeout THEN]]>
+</Line>
+<Line Number="118">
+<![CDATA[  State_Text:=20;]]>
+</Line>
+<Line Number="119">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="120">
+<![CDATA[IF (DO_Open OR DO_Close OR (DI_Action AND NOT DI_Opened AND NOT DI_Closed)) and NOT  Timeout THEN]]>
+</Line>
+<Line Number="121">
+<![CDATA[State_Text:=3;]]>
+</Line>
+<Line Number="122">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="123">
+<![CDATA[//阀门校修正值Check_state状态：1：关阀+恢复KB默认值；2：开阀+记录全关开度值；3：关阀+记录全开开度值；4、计算KB+复位]]>
+</Line>
+<Line Number="124">
+<![CDATA[//1]]>
+</Line>
+<Line Number="125">
+<![CDATA[IF CmdNo=6 AND DI_Remote AND NOT Timeout THEN]]>
+</Line>
+<Line Number="126">
+<![CDATA[  Check_State:=1;  ]]>
+</Line>
+<Line Number="127">
+<![CDATA[  k:=1;]]>
+</Line>
+<Line Number="128">
+<![CDATA[  b:=0;]]>
+</Line>
+<Line Number="129">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="130">
+<![CDATA[]]>
+</Line>
+<Line Number="131">
+<![CDATA[//2]]>
+</Line>
+<Line Number="132">
+<![CDATA[IF DI_Closed AND Check_State=1  AND NOT Timeout THEN  ]]>
+</Line>
+<Line Number="133">
+<![CDATA[  CL_AI:=AO_Percent_I;]]>
+</Line>
+<Line Number="134">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="135">
+<![CDATA[  Check_State:=2;]]>
+</Line>
+<Line Number="136">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="137">
+<![CDATA[]]>
+</Line>
+<Line Number="138">
+<![CDATA[//3]]>
+</Line>
+<Line Number="139">
+<![CDATA[IF DI_Opened AND Check_State=2  AND NOT Timeout THEN]]>
+</Line>
+<Line Number="140">
+<![CDATA[  OP_AI:=AO_Percent_I; ]]>
+</Line>
+<Line Number="141">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="142">
+<![CDATA[  Check_State:=3;]]>
+</Line>
+<Line Number="143">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="144">
+<![CDATA[]]>
+</Line>
+<Line Number="145">
+<![CDATA[//4]]>
+</Line>
+<Line Number="146">
+<![CDATA[IF (CL_AI<0 OR CL_AI>30 OR OP_AI<70 OR OP_AI>105) AND Check_State=3 AND NOT Timeout THEN]]>
+</Line>
+<Line Number="147">
+<![CDATA[  Timeout:=1;]]>
+</Line>
+<Line Number="148">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="149">
+<![CDATA[IF CL_AI>=0 AND CL_AI<=30 AND OP_AI>=70 AND OP_AI<=105 AND Check_State=3 AND NOT Timeout THEN]]>
+</Line>
+<Line Number="150">
+<![CDATA[  k:=(AI_H-AI_L)/(OP_AI-CL_AI);]]>
+</Line>
+<Line Number="151">
+<![CDATA[  b:=(AI_L*OP_AI-AI_H*CL_AI)/(OP_AI-CL_AI);]]>
+</Line>
+<Line Number="152">
+<![CDATA[   Check_State:=4;]]>
+</Line>
+<Line Number="153">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="154">
+<![CDATA[//成功标志]]>
+</Line>
+<Line Number="155">
+<![CDATA[IF CmdNo<>0 THEN]]>
+</Line>
+<Line Number="156">
+<![CDATA[  Last_CmdNo:=CmdNo;]]>
+</Line>
+<Line Number="157">
+<![CDATA[  CmdNo:=0;//清空命令号]]>
+</Line>
+<Line Number="158">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="159">
+<![CDATA[Running_Success:=(Last_CmdNo=4 AND Percent_SP_I=100 AND DI_Opened) OR (Last_CmdNo=4 AND Percent_SP_I=0 AND DI_Closed) OR (Last_CmdNo=4 AND Percent_SP_I<100 AND Percent_SP_I>0 AND IN_Offset) OR (Last_CmdNo=6 AND Check_State=4) OR Last_CmdNo=9;]]>
+</Line>
+<Line Number="160">
+<![CDATA[]]>
+</Line>
+<Line Number="161">
+<![CDATA[//故障记录]]>
+</Line>
+<Line Number="162">
+<![CDATA[Timeout_Plus:=Timeout & NOT Last_Timeout;]]>
+</Line>
+<Line Number="163">
+<![CDATA[Last_Timeout:=Timeout;]]>
+</Line>
+<Line Number="164">
+<![CDATA[IF Timeout_Plus THEN]]>
+</Line>
+<Line Number="165">
+<![CDATA[  Fault:=Fault+1;]]>
+</Line>
+<Line Number="166">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="167">
+<![CDATA[IF Fault=32767 OR CmdNo=11 THEN]]>
+</Line>
+<Line Number="168">
+<![CDATA[  Fault:=0;]]>
+</Line>
+<Line Number="169">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="170">
+<![CDATA[//运行时间记录]]>
+</Line>
+<Line Number="171">
+<![CDATA[IF (DO_Open OR DO_Close OR (DI_Action AND NOT DI_Opened AND NOT DI_Closed)) AND PLUS_1S THEN]]>
+</Line>
+<Line Number="172">
+<![CDATA[  Run_S:=Run_S+1;]]>
+</Line>
+<Line Number="173">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="174">
+<![CDATA[IF Run_S>=60 THEN]]>
+</Line>
+<Line Number="175">
+<![CDATA[  Run_M:=Run_M+1;]]>
+</Line>
+<Line Number="176">
+<![CDATA[  Run_S:=0;]]>
+</Line>
+<Line Number="177">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="178">
+<![CDATA[IF Run_M>=60 THEN]]>
+</Line>
+<Line Number="179">
+<![CDATA[  Run_H:=Run_H+1;]]>
+</Line>
+<Line Number="180">
+<![CDATA[  Run_M:=0;]]>
+</Line>
+<Line Number="181">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="182">
+<![CDATA[IF Run_H=32767 THEN]]>
+</Line>
+<Line Number="183">
+<![CDATA[  Run_H:=0;]]>
+</Line>
+<Line Number="184">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="185">
+<![CDATA[//清除记录]]>
+</Line>
+<Line Number="186">
+<![CDATA[IF Clear_Record THEN]]>
+</Line>
+<Line Number="187">
+<![CDATA[  Fault:=0;]]>
+</Line>
+<Line Number="188">
+<![CDATA[  Run_H:=0;]]>
+</Line>
+<Line Number="189">
+<![CDATA[  Run_M:=0;]]>
+</Line>
+<Line Number="190">
+<![CDATA[  Run_S:=0;]]>
+</Line>
+<Line Number="191">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="192">
+<![CDATA[]]>
+</Line>
+<Line Number="193">
+<![CDATA[  ]]>
+</Line>
+</STContent>
+</Routine>
+</Routines>
+</AddOnInstructionDefinition>
+</AddOnInstructionDefinitions>
+</Controller>
+</RSLogix5000Content>

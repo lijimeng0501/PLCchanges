@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--马达直启,小空调、风机
+-->
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="28.02" TargetName="MPDS" TargetType="AddOnInstructionDefinition" TargetRevision="1.0 " TargetLastEdited="2020-02-20T03:44:34.339Z" ContainsContext="true" Owner="Lenovo" ExportDate="Fri Feb 21 18:32:16 2020" ExportOptions="References NoRawData L5KData DecoratedData Context Dependencies ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Context" Name="CDDT_L6_HK_A_V10">
+<DataTypes Use="Context">
+</DataTypes>
+<AddOnInstructionDefinitions Use="Context">
+<AddOnInstructionDefinition Use="Target" Name="MPDS" Revision="1.0" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2018-08-30T11:10:36.721Z" CreatedBy="SC-201805191256\Administrator" EditedDate="2020-02-20T03:44:34.339Z" EditedBy="DESKTOP-GR19KFG\Lenovo" SoftwareRevision="v28.02"
+>
+<Description>
+<![CDATA[马达直启,小空调、风机
+]]>
+</Description>
+<Parameters>
+<Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[启用输入 - 系统定义的参数]]>
+</Description>
+</Parameter>
+<Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[启用输出 - 系统定义的参数]]>
+</Description>
+</Parameter>
+<Parameter Name="Total_Reset" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[总故障复位]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Total_Clear" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[清除故障次数、运行时间记录]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="CmdNo" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[命令号1,2,8]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Timeout_Limit_SP" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[启动超时时间]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Running_Success" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[执行成功]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="State" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[风机状态编码]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Fault" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[故障次数]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_H" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行小时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_M" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行分]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Run_S" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[运行秒]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PLUS_1S" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1s脉冲]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cyclic_Send" TagType="Base" DataType="INT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[应答报文：循环发送状态字工程量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="LockValve_ID" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[联锁阀门编号]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cyclic_Received" TagType="Base" DataType="INT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[任务报文：循环接收控制字工程量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cyclic_Send_L1" TagType="Base" DataType="INT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[应答报文：循环发送电流A]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cyclic_Send_L2" TagType="Base" DataType="INT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[应答报文：循环发送电流B]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cyclic_Send_L3" TagType="Base" DataType="INT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[应答报文：循环发送电流C]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="INT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="QR_HMI" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[单设备确认位，1S脉冲]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cmd_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[HMI单设备控制命令号]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="LockValve_Opened" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[联动阀门全开]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="LockValve_Timeout" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[联动阀门超时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Timeout" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[设备启动超时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Rated_Current" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[额定电流]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Mode_Status_HMI" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[0：为单设备控制； 1：当处于模式控制时，该单设备对应的模式运行时，不能控制该单设备]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="QX" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[权限]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Visible_QR_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏二次确认显示]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alarm_State_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏报警状态变量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Last_CmdNo" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="None">
+<Description>
+<![CDATA[上一次命令]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Event_Cmd_HMI" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[触摸屏命令不清零，用于事件记录显示]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Comm_State" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[通讯状态]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+</Parameters>
+<LocalTags>
+<LocalTag Name="Start_Allow" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[待启动（开阀过程）]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="DO_Time" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[启动计时]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Fault_Counter" DataType="FBD_COUNTER" ExternalAccess="None">
+<Description>
+<![CDATA[故障次数计数器]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[[1,0,0,0,4,0]]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<Structure DataType="FBD_COUNTER">
+<DataValueMember Name="EnableIn" DataType="BOOL" Value="1"/>
+<DataValueMember Name="CUEnable" DataType="BOOL" Value="0"/>
+<DataValueMember Name="CDEnable" DataType="BOOL" Value="0"/>
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="Reset" DataType="BOOL" Value="0"/>
+<DataValueMember Name="EnableOut" DataType="BOOL" Value="0"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="CU" DataType="BOOL" Value="0"/>
+<DataValueMember Name="CD" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="OV" DataType="BOOL" Value="0"/>
+<DataValueMember Name="UN" DataType="BOOL" Value="0"/>
+</Structure>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="LockValve_DO_Open" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[联锁阀门正在打开]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Alarm_State" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[触摸屏报警状态临时变量]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+</LocalTags>
+<Routines>
+<Routine Name="Logic" Type="ST">
+<STContent>
+<Line Number="0">
+<![CDATA[(*CmdNo：1、停止   2、启动 3、火灾模式启动  8、异警复位 0、保持原有状态*)]]>
+</Line>
+<Line Number="1">
+<![CDATA[(*马达保护器状态字解析：Cyclic_Send 0位=脱扣；1位=报警；2位=输出A；3位=输出B；4位=输入1；5位=输入2；6位=输入3；7位=输入4；8位=有电流；9位=接地故障；60号参数设置为107*)]]>
+</Line>
+<Line Number="2">
+<![CDATA[(*马达保护器控制字解析：Cyclic_Received 0位=输出A；1位=输出B；2位=故障复位；马保59号参数设置为105,*)]]>
+</Line>
+<Line Number="3">
+<![CDATA[//Cyclic_Send.4远控；Cyclic_Send.5合闸；Cyclic_Send.6运行；Cyclic_Send.7过滤器报警；]]>
+</Line>
+<Line Number="4">
+<![CDATA[//Cyclic_Received.0启动;Cyclic_Received.1火灾模式启动;]]>
+</Line>
+<Line Number="5">
+<![CDATA[//二次确认]]>
+</Line>
+<Line Number="6">
+<![CDATA[IF (Cmd_HMI = 2  AND QX AND NOT  Mode_Status_HMI AND Cyclic_Send.4 AND Cyclic_Send.5 AND State=0 AND  LockValve_Opened) ]]>
+</Line>
+<Line Number="7">
+<![CDATA[   OR ]]>
+</Line>
+<Line Number="8">
+<![CDATA[   (Cmd_HMI =1 AND  QX AND  NOT Mode_Status_HMI AND Cyclic_Send.4 AND Cyclic_Send.5 AND (State=1 OR State=2))]]>
+</Line>
+<Line Number="9">
+<![CDATA[   OR ]]>
+</Line>
+<Line Number="10">
+<![CDATA[   (Cmd_HMI= 8 AND QX AND NOT  Mode_Status_HMI AND Cyclic_Send.4 AND Cyclic_Send.5 AND State>2)]]>
+</Line>
+<Line Number="11">
+<![CDATA[	OR ]]>
+</Line>
+<Line Number="12">
+<![CDATA[   (Cmd_HMI= 10  OR  Cmd_HMI= 11 AND QX )]]>
+</Line>
+<Line Number="13">
+<![CDATA[THEN]]>
+</Line>
+<Line Number="14">
+<![CDATA[	Visible_QR_HMI := 1;]]>
+</Line>
+<Line Number="15">
+<![CDATA[	ELSE]]>
+</Line>
+<Line Number="16">
+<![CDATA[	Visible_QR_HMI := 0;]]>
+</Line>
+<Line Number="17">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="18">
+<![CDATA[//警告]]>
+</Line>
+<Line Number="19">
+<![CDATA[Alarm_State:= 0;]]>
+</Line>
+<Line Number="20">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=2 OR Cmd_HMI=3 OR Cmd_HMI=8)  AND NOT QX THEN  ]]>
+</Line>
+<Line Number="21">
+<![CDATA[Alarm_State:= 1;// 权限在BAS，触摸屏不能控制]]>
+</Line>
+<Line Number="22">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="23">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=2 OR Cmd_HMI=3  OR Cmd_HMI=8)  AND Mode_Status_HMI  THEN]]>
+</Line>
+<Line Number="24">
+<![CDATA[Alarm_State:= 2;//大模式状态，触摸屏不能单设备控制]]>
+</Line>
+<Line Number="25">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="26">
+<![CDATA[IF (Cmd_HMI=1 OR Cmd_HMI=2 OR Cmd_HMI=3) AND State>2  THEN ]]>
+</Line>
+<Line Number="27">
+<![CDATA[Alarm_State:= 3;//故障状态，不能启动]]>
+</Line>
+<Line Number="28">
+<![CDATA[END_IF; ]]>
+</Line>
+<Line Number="29">
+<![CDATA[IF Cmd_HMI=8  AND State < 3  THEN]]>
+</Line>
+<Line Number="30">
+<![CDATA[Alarm_State:= 4;//没有故障，不需复位操作]]>
+</Line>
+<Line Number="31">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="32">
+<![CDATA[IF (Cmd_HMI=2 OR Cmd_HMI=3) AND (State= 1 OR State = 2) THEN]]>
+</Line>
+<Line Number="33">
+<![CDATA[Alarm_State:= 5;//已经启动，不能再次执行启动命令]]>
+</Line>
+<Line Number="34">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="35">
+<![CDATA[IF Cmd_HMI=1  AND State= 0 THEN ]]>
+</Line>
+<Line Number="36">
+<![CDATA[ Alarm_State:= 6;//已经停止状态，不需要执行停止命令]]>
+</Line>
+<Line Number="37">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="38">
+<![CDATA[IF (Cmd_HMI=2 OR Cmd_HMI=3) AND  NOT LockValve_Opened THEN]]>
+</Line>
+<Line Number="39">
+<![CDATA[Alarm_State:= 7;//联锁阀门未开，]]>
+</Line>
+<Line Number="40">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="41">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=2 OR Cmd_HMI=3  OR Cmd_HMI=8)  AND NOT Cyclic_Send.4  THEN ]]>
+</Line>
+<Line Number="42">
+<![CDATA[ Alarm_State:= 8;//本地控制，触摸屏不能操作]]>
+</Line>
+<Line Number="43">
+<![CDATA[END_IF;  ]]>
+</Line>
+<Line Number="44">
+<![CDATA[IF (Cmd_HMI=1  OR Cmd_HMI=2 OR Cmd_HMI=3  OR Cmd_HMI=8)  AND NOT Cyclic_Send.5  THEN]]>
+</Line>
+<Line Number="45">
+<![CDATA[Alarm_State:= 9;//主电源未合闸，不能控制]]>
+</Line>
+<Line Number="46">
+<![CDATA[END_IF;      ]]>
+</Line>
+<Line Number="47">
+<![CDATA[Alarm_State_HMI := Alarm_State;]]>
+</Line>
+<Line Number="48">
+<![CDATA[]]>
+</Line>
+<Line Number="49">
+<![CDATA[//HMI单设备命令控制]]>
+</Line>
+<Line Number="50">
+<![CDATA[IF QR_HMI THEN]]>
+</Line>
+<Line Number="51">
+<![CDATA[	CmdNo:=Cmd_HMI;]]>
+</Line>
+<Line Number="52">
+<![CDATA[	Event_Cmd_HMI:=Cmd_HMI;]]>
+</Line>
+<Line Number="53">
+<![CDATA[ 	Cmd_HMI := 0;]]>
+</Line>
+<Line Number="54">
+<![CDATA[	QR_HMI := 0;]]>
+</Line>
+<Line Number="55">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="56">
+<![CDATA[//启动控制]]>
+</Line>
+<Line Number="57">
+<![CDATA[Start_Allow:=(CmdNo=2 OR CmdNo=3 OR Start_Allow) AND CmdNo<>1 AND Cyclic_Send.4 AND Cyclic_Send.5 AND NOT Timeout AND (NOT LockValve_Timeout OR LockValve_Opened);]]>
+</Line>
+<Line Number="58">
+<![CDATA[//1、正常启动]]>
+</Line>
+<Line Number="59">
+<![CDATA[Cyclic_Received.0:=Last_CmdNo=2 AND Start_Allow AND NOT Cyclic_Send.0 AND NOT Cyclic_Send.7 AND LockValve_Opened;]]>
+</Line>
+<Line Number="60">
+<![CDATA[//2、火灾启动]]>
+</Line>
+<Line Number="61">
+<![CDATA[Cyclic_Received.1:=Last_CmdNo=3 AND Start_Allow AND LockValve_Opened;]]>
+</Line>
+<Line Number="62">
+<![CDATA[]]>
+</Line>
+<Line Number="63">
+<![CDATA[//异警处理]]>
+</Line>
+<Line Number="64">
+<![CDATA[//启动超时]]>
+</Line>
+<Line Number="65">
+<![CDATA[IF (Cyclic_Received.0 OR Cyclic_Received.1) AND NOT Cyclic_Send.6 AND PLUS_1S AND NOT Timeout THEN]]>
+</Line>
+<Line Number="66">
+<![CDATA[  DO_Time:=DO_Time+1;]]>
+</Line>
+<Line Number="67">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="68">
+<![CDATA[IF NOT Start_Allow OR Cyclic_Send.6 THEN]]>
+</Line>
+<Line Number="69">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="70">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="71">
+<![CDATA[IF DO_Time>Timeout_Limit_SP  OR ((CmdNo >1 AND CmdNo <4)  and ( NOT Cyclic_Send.4 OR NOT Cyclic_Send.5 OR LockValve_Timeout )) THEN]]>
+</Line>
+<Line Number="72">
+<![CDATA[  Timeout:=1;]]>
+</Line>
+<Line Number="73">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="74">
+<![CDATA[//故障复位]]>
+</Line>
+<Line Number="75">
+<![CDATA[IF CmdNo=8 OR Total_Reset THEN]]>
+</Line>
+<Line Number="76">
+<![CDATA[  DO_Time:=0;]]>
+</Line>
+<Line Number="77">
+<![CDATA[  Timeout:=0;]]>
+</Line>
+<Line Number="78">
+<![CDATA[  Cyclic_Received.2:=Cyclic_Send.0;]]>
+</Line>
+<Line Number="79">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="80">
+<![CDATA[]]>
+</Line>
+<Line Number="81">
+<![CDATA[//清除故障复位命令]]>
+</Line>
+<Line Number="82">
+<![CDATA[IF  NOT Cyclic_Send.0 THEN]]>
+</Line>
+<Line Number="83">
+<![CDATA[	Cyclic_Received.2:=0;]]>
+</Line>
+<Line Number="84">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="85">
+<![CDATA[]]>
+</Line>
+<Line Number="86">
+<![CDATA[]]>
+</Line>
+<Line Number="87">
+<![CDATA[//设备状态编码 停止=0，正常运行=1，火灾运行=2,马达故障=3，过滤器故障=4，启动超时=20；]]>
+</Line>
+<Line Number="88">
+<![CDATA[IF NOT Cyclic_Send.6 THEN]]>
+</Line>
+<Line Number="89">
+<![CDATA[  State:=0;]]>
+</Line>
+<Line Number="90">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="91">
+<![CDATA[IF (NOT Cyclic_Send.4 OR Last_CmdNo=2 ) AND Cyclic_Send.6 THEN]]>
+</Line>
+<Line Number="92">
+<![CDATA[  State:=1;]]>
+</Line>
+<Line Number="93">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="94">
+<![CDATA[IF Last_CmdNo=3 AND Cyclic_Send.6 THEN]]>
+</Line>
+<Line Number="95">
+<![CDATA[  State:=2;]]>
+</Line>
+<Line Number="96">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="97">
+<![CDATA[IF Cyclic_Send.0 THEN]]>
+</Line>
+<Line Number="98">
+<![CDATA[  State:=3;]]>
+</Line>
+<Line Number="99">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="100">
+<![CDATA[IF Cyclic_Send.7 THEN]]>
+</Line>
+<Line Number="101">
+<![CDATA[  State:=4;]]>
+</Line>
+<Line Number="102">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="103">
+<![CDATA[IF Timeout THEN]]>
+</Line>
+<Line Number="104">
+<![CDATA[  State:=20;]]>
+</Line>
+<Line Number="105">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="106">
+<![CDATA[]]>
+</Line>
+<Line Number="107">
+<![CDATA[//数据统计]]>
+</Line>
+<Line Number="108">
+<![CDATA[//故障次数记录]]>
+</Line>
+<Line Number="109">
+<![CDATA[Fault_Counter.PRE :=32767;]]>
+</Line>
+<Line Number="110">
+<![CDATA[Fault_Counter.CUEnable :=  Cyclic_Send.0 OR Cyclic_Send.7;]]>
+</Line>
+<Line Number="111">
+<![CDATA[CTUD(Fault_Counter);]]>
+</Line>
+<Line Number="112">
+<![CDATA[Fault:=Fault_Counter.ACC;]]>
+</Line>
+<Line Number="113">
+<![CDATA[Fault_Counter.Reset := Total_Clear  OR Fault_Counter.DN OR CmdNo=11;]]>
+</Line>
+<Line Number="114">
+<![CDATA[]]>
+</Line>
+<Line Number="115">
+<![CDATA[]]>
+</Line>
+<Line Number="116">
+<![CDATA[//运行时间记录]]>
+</Line>
+<Line Number="117">
+<![CDATA[IF Cyclic_Send.6 AND PLUS_1S THEN]]>
+</Line>
+<Line Number="118">
+<![CDATA[  Run_S:=Run_S+1;]]>
+</Line>
+<Line Number="119">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="120">
+<![CDATA[IF Run_S>=60 THEN]]>
+</Line>
+<Line Number="121">
+<![CDATA[  Run_M:=Run_M+1;]]>
+</Line>
+<Line Number="122">
+<![CDATA[  Run_S:=0;]]>
+</Line>
+<Line Number="123">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="124">
+<![CDATA[IF Run_M>=60 THEN]]>
+</Line>
+<Line Number="125">
+<![CDATA[  Run_H:=Run_H+1;]]>
+</Line>
+<Line Number="126">
+<![CDATA[  Run_M:=0;]]>
+</Line>
+<Line Number="127">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="128">
+<![CDATA[IF Run_H=32767 THEN]]>
+</Line>
+<Line Number="129">
+<![CDATA[  Run_H:=0;]]>
+</Line>
+<Line Number="130">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="131">
+<![CDATA[//清除记录]]>
+</Line>
+<Line Number="132">
+<![CDATA[IF Total_Clear OR CmdNo=10 THEN]]>
+</Line>
+<Line Number="133">
+<![CDATA[  Run_H:=0;]]>
+</Line>
+<Line Number="134">
+<![CDATA[  Run_M:=0;]]>
+</Line>
+<Line Number="135">
+<![CDATA[  Run_S:=0;]]>
+</Line>
+<Line Number="136">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="137">
+<![CDATA[]]>
+</Line>
+<Line Number="138">
+<![CDATA[//成功标志]]>
+</Line>
+<Line Number="139">
+<![CDATA[IF CmdNo<>0  THEN]]>
+</Line>
+<Line Number="140">
+<![CDATA[  Last_CmdNo:=CmdNo;]]>
+</Line>
+<Line Number="141">
+<![CDATA[  CmdNo:=0;//清空命令号]]>
+</Line>
+<Line Number="142">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="143">
+<![CDATA[Running_Success:=((Last_CmdNo=2 OR Last_CmdNo=3) AND Cyclic_Send.6) OR (Last_CmdNo=1 AND NOT Cyclic_Send.6) OR Last_CmdNo=9;]]>
+</Line>
+<Line Number="144">
+<![CDATA[  ]]>
+</Line>
+<Line Number="145">
+<![CDATA[  ]]>
+</Line>
+</STContent>
+</Routine>
+</Routines>
+</AddOnInstructionDefinition>
+</AddOnInstructionDefinitions>
+</Controller>
+</RSLogix5000Content>

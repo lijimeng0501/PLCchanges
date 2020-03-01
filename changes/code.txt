@@ -1,0 +1,36 @@
+
+SYS_Data.Data_Init:=0;
+
+
+SYS_Data.HMI_HS:=0;
+
+LSB_Data.Startup1:=0;
+LSB_Data.Starting1 := 0;
+LSB_Data.Last_ID1 := 0;
+LSB_Data.Startup2:=0;
+LSB_Data.Starting2 := 0;
+LSB_Data.Last_ID2 := 0;
+
+
+FM1[N].DT.AI_H:=100;
+Rated_Current[N-1].ID:=0;
+Rated_Current[N+47].ID:=0;
+
+
+Mode_Data.S_Mode_Min:=201;
+Mode_Data.S_Mode_Max:=223;
+Mode_Data.S_Fire_Mode_L1:=208;
+Mode_Data.S_Fire_Mode_H1:=210;
+Mode_Data.S_Fire_Mode_L2:=214;
+Mode_Data.S_Fire_Mode_H2:=217;
+Mode_Data.S_Fire_Mode_L3:=220;
+Mode_Data.S_Fire_Mode_H3:=223;
+
+
+Set_Date_Time_PLUS.PRE:=2000;
+Set_Date_Time_PLUS.TimerEnable := Set_Date_Time_HMI;
+TONR(Set_Date_Time_PLUS);
+
+IF Set_Date_Time_PLUS.DN THEN
+Set_Date_Time_HMI:=0;
+END_IF;
